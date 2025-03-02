@@ -8,14 +8,19 @@ function Book(title, author, pages, read) {
     console.log(`This is ${title} by ${author} with ${pages} pages, and it's ${read}.`);
 }
 
+Book.prototype.modifyReadStatus = function () {
+    
+}
+
 let btn = document.querySelector("#add-book");
 let content = document.querySelector(".content");
-let delete = document.querySelector(".delete");
+
 
 function addBook () {
     const bookIndex = library.length - 1;
     const book = document.createElement("div");
     book.classList.add("book");
+    book.id = `${bookIndex}`;
         const bookTitle = document.createElement("div");
         bookTitle.classList.add("title");
         book.appendChild(bookTitle);
@@ -39,6 +44,7 @@ function addBook () {
         readStatusText.appendChild(readStatus);
         const deleteBook = document.createElement("div");
         deleteBook.classList.add("delete");
+        deleteBook.id = `delete${bookIndex}`;
         book.appendChild(deleteBook);
         deleteBook.textContent = "Delete";
     content.appendChild(book);
@@ -55,9 +61,28 @@ btn.addEventListener("click", () => {
     library.push(title);
     console.log(library);
     addBook();
+    
+})
+    
+
+const delBtns = document.querySelectorAll(".delete"); // Selectează toate butoanele
+
+delBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        console.log("Ai apăsat pe un buton!");
+    });
 });
 
-delete.addEventListener("click", () => {
-    content.innerHTML = "";
+
+
+content.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete")) {
+        event.target.parentNode.remove();
+
+    };
 })
+
+
+
+
 
