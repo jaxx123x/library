@@ -1,0 +1,67 @@
+body {
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: 'Allan', sans-serif;
+}
+
+.header {
+    grid-row: 1 / 2;
+    background-color: wheat;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 25px;
+    padding-right: 25px;
+    align-items: center;
+    gap: 25px;
+}
+
+.header > button {
+    background-color: gray;
+    color: white;
+    height: 45%;
+    width: 10%;
+    border: none;
+    border-radius: 10px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    grid-template-rows: repeat(3, minmax(150px, 1fr));
+    gap: 15px;
+    justify-items: center;
+    align-items: center;
+    background-color: rgb(187, 172, 142)
+}
+
+
+
+
+
+.content > .book {
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 15px;
+    height: 75%;
+    width: 50%;
+    background-color: aliceblue;
+    font-size: 19px;
+    
+}
+
+.content > .book > .delete {
+    display: flex;
+    background-color: red;
+    width: 35%;
+    height: 15%;
+    justify-content: center;
+    justify-self: flex-end;
+    
+}
+
+
+
