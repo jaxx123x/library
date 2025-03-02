@@ -1,16 +1,14 @@
 const library = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
-    console.log(`This is ${title} by ${author} with ${pages} pages, and it's ${read}.`);
+    
+    console.log(`This is ${title} by ${author} with ${pages} pages.`);
 }
 
-Book.prototype.modifyReadStatus = function () {
-    
-}
+
 
 let btn = document.querySelector("#add-book");
 let content = document.querySelector(".content");
@@ -33,15 +31,10 @@ function addBook () {
         bookPages.classList.add("pages");
         book.appendChild(bookPages);
         bookPages.textContent = `Pages: ${library[bookIndex].pages}`;
-        const readStatusText = document.createElement("div");
-        readStatusText.classList.add("read");
-        book.appendChild(readStatusText);
-        readStatusText.textContent = "Read:";
-        const readStatus = document.createElement("input");
-        readStatus.type = "checkbox";
-        readStatus.id = "value";
-        readStatus.name = "value";
-        readStatusText.appendChild(readStatus);
+        const readStatus = document.createElement("div");
+        readStatus.classList.add("read-status");
+        book.appendChild(readStatus);
+        readStatus.textContent = "Unread";
         const deleteBook = document.createElement("div");
         deleteBook.classList.add("delete");
         deleteBook.id = `delete${bookIndex}`;
@@ -55,9 +48,9 @@ btn.addEventListener("click", () => {
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
-    let readValue = document.getElementById("value").value;
+    
     let title = titleValue;
-    title = new Book(titleValue, authorValue, pagesValue, readValue);
+    title = new Book(titleValue, authorValue, pagesValue);
     library.push(title);
     console.log(library);
     addBook();
@@ -65,13 +58,7 @@ btn.addEventListener("click", () => {
 })
     
 
-const delBtns = document.querySelectorAll(".delete"); // Selectează toate butoanele
 
-delBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        console.log("Ai apăsat pe un buton!");
-    });
-});
 
 
 
@@ -80,6 +67,19 @@ content.addEventListener("click", (event) => {
         event.target.parentNode.remove();
 
     };
+})
+
+content.addEventListener("click", (event) => {
+    if (event.target.classList.contains("read-status") && event.target.textContent != "Read :)") {
+        event.target.parentNode.style.backgroundColor = "green";
+        event.target.textContent = "Read :)";
+        event.target.style.backgroundColor = "rgb(7, 232, 123)";
+    }
+    else if (event.target.textContent === "Read :)" && event.target.classList.contains("read-status")){
+        event.target.parentNode.style.backgroundColor = "white";
+        event.target.textContent = "Unread";
+        event.target.style.backgroundColor = "red";
+    }
 })
 
 

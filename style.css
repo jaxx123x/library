@@ -50,18 +50,30 @@ body {
     width: 50%;
     background-color: aliceblue;
     font-size: 19px;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .content > .book > .delete {
     display: flex;
     background-color: red;
-    width: 35%;
     height: 15%;
     justify-content: center;
-    justify-self: flex-end;
+    
     
 }
+
+.content > .book > .read-status {
+    display: flex;
+    background-color: red;
+    height: 15%;
+    justify-content: center;
+    
+    
+}
+
+
 
 
 
