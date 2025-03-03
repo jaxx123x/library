@@ -1,18 +1,12 @@
 const library = [];
-
 function Book(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    
-    console.log(`This is ${title} by ${author} with ${pages} pages.`);
 }
-
-
 
 let btn = document.querySelector("#add-book");
 let content = document.querySelector(".content");
-
 
 function addBook () {
     const bookIndex = library.length - 1;
@@ -43,31 +37,38 @@ function addBook () {
     content.appendChild(book);
 };
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", (event) => {
     event.preventDefault();
     let titleValue = document.getElementById("title").value;
     let authorValue = document.getElementById("author").value;
     let pagesValue = document.getElementById("pages").value;
-    
+    if (titleValue === "" || authorValue === "" || pagesValue === "") {alert ("Please fill the fields")
+        return;
+    };
     let title = titleValue;
     title = new Book(titleValue, authorValue, pagesValue);
     library.push(title);
     console.log(library);
     addBook();
-    
 })
     
-
-
-
 
 
 content.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete")) {
-        event.target.parentNode.remove();
+        const bookElement = event.target.parentNode; 
+        const bookTitle = bookElement.querySelector(".title").textContent.replace("Title: ", ""); 
+        
+        
+        const bookIndex = library.findIndex(book => book.title === bookTitle);
 
-    };
-})
+        if (bookIndex !== -1) { 
+            library.splice(bookIndex, 1); 
+        }
+
+        bookElement.remove(); 
+    }
+});
 
 content.addEventListener("click", (event) => {
     if (event.target.classList.contains("read-status") && event.target.textContent != "Read :)") {
